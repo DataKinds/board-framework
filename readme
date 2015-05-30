@@ -1,0 +1,19 @@
+folder organization:
+posts
+	<post number> (file, not folder) (deleted after 100, moved to top if posted on)
+		<json describing the post>
+
+json organization:
+{
+	'0' (first post, by OP)
+	{
+		'title' (title of the post)
+		'body' (text in the post)
+	}
+	'1'
+	{
+		'body' (no title, this is the reply)
+	}
+	'2'
+	...
+}
