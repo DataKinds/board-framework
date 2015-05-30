@@ -5,16 +5,14 @@
 		<title>Wofl</title>
 	</head>
 	<body>
-		<% postHash = JSON.parse(File.read("posts/#{params["captures"].first}"))
 		<% 
-		postListing = Dir['posts/*']
-		postListing.sort! {|a, b| File.basename(a).to_i <=> File.basename(b).to_i }
-		postListing.each do |fileName| 
-			postHash = JSON.parse(File.read(fileName)) %>
-			<a href="/"><%= postHash["0"]["title"] %></a>
-			<br>
-			<div><%= postHash["0"]["body"] %></div>
-			<br><br>
-		<% end %>
+		postHash = JSON.parse(File.read("posts/#{params["captures"].first}")) %>
+		<h2><%= postHash["0"]["title"] %></h2>
+		<p><%= postHash["0"]["body"] %></p><br>
+		<% if postHash.length > 1 #if there have actually been replies
+			(1..postHash.length-1).each do |postIndex| %>
+				<p><%= postHash[postIndex.to_s]["body"] %></p>
+			<% end 
+		end %>
 	</body>
 </html> 

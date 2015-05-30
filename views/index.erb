@@ -5,12 +5,13 @@
 		<title></title>
 	</head>
 	<body>
+		<a href="/createpost">Make a thread</a><br><br>
 		<% 
 		postListing = Dir['posts/*']
 		postListing.sort! {|a, b| File.basename(a).to_i <=> File.basename(b).to_i }
 		postListing.each do |fileName| 
 			postHash = JSON.parse(File.read(fileName)) %>
-			<a href="/"><%= postHash["0"]["title"] %></a>
+			<a href="/<%= File.basename(fileName) %>"><%= postHash["0"]["title"] %></a>
 			<br>
 			<div><%= postHash["0"]["body"] %></div>
 			<br><br>
