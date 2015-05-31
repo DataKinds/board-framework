@@ -1,0 +1,55 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:700); 
+
+html {
+	background: linear-gradient(180deg, #D0D0D0, #F0F0F0);
+}
+
+.postContainer {
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 90px;
+}
+
+.woflImage {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	height: 70px;
+}
+
+.topPanel {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 70px;
+	background: linear-gradient(180deg, #707070, #808080);
+}
+
+.postButton {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	height: 50px;
+}
+
+.postTitle {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 64px;
+	display: block;
+	text-align: center;
+	width: 100%;
+	text-decoration: none;
+	color: black;
+}
+
+.postFormHolder {
+	position: fixed;
+	background: #002687;
+	width: 30%;
+	height: 50%;
+	left: 50%;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+}

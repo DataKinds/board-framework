@@ -6,12 +6,17 @@ require_relative "../helperFunctions"
 <html>
 	<head>
 		<title>Wofl</title>
+		<script src="/post.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/postview.css">
+		<link rel="stylesheet" href="/universal.css">
 	</head>
 	<body>
-		<a href="/">
-			<img class="woflImage" src="/wofl.png"></img>
-		</a>
+		<div class="topPanel">
+			<a href="/">
+				<img class="woflImage" src="/wofl.png"></img>
+			</a>
+			<img src="/add.png" alt="Post something!" id="postButton" class="postButton" onclick="displayPostForm()"></img>
+		</div>
 		<div class="postContainer">
 			<a href="/">&lt; Return home</a>
 			<% 

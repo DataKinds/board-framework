@@ -3,17 +3,18 @@
 <html>
 	<head>
 		<title>Wofl</title>
+		<script src="/post.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/index.css">
+		<link rel="stylesheet" href="/universal.css">
 	</head>
 	<body>
 		<div class="topPanel">
 			<a href="/">
 				<img class="woflImage" src="/wofl.png"></img>
 			</a>
-			<div id="postButton" class="postButton">+</div>
+			<img src="/add.png" alt="Post something!" id="postButton" class="postButton" onclick="displayPostForm()"></img>
 		</div>
-		<div class="postsContainer">
-			<a href="/createpost">Make a post</a><br><br>
+		<div class="postContainer">
 			<% 
 			postListing = Dir["posts/*"]
 			postListing.sort! {|a, b| File.basename(b).to_i <=> File.basename(a).to_i }
