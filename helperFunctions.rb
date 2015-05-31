@@ -3,9 +3,23 @@ def htmlEscape(html) #http://stackoverflow.com/questions/2123586/how-do-i-html-e
 end 
 
 def linkify(text) #turn text that has a link into an actual link
-	urlRegex = /(https?:\/\/.+)\s?$?/i
-	text.match(urlRegex)
-	return text.gsub(urlRegex, "<a href=\"#{$&}\">#{$&}</a>")  #$&, you have to match it beforehand because it means last match, not this match ;-;
+	urlRegex = /https?:\/\/\S+/i
+	outText = text
+	text.scan(urlRegex).each do |match|
+		outText.gsub!(match, "<a href=\"#{match}\">#{match}</a>")
+	end
+	return outText
+end
+
+def idlinking(text)
+	idRegex = /id(\d{1,3})/i
+	outText = text
+	text.scan(idRegex).each do |idSingleArray|
+		idSingleArray.each do |match| #each.each it's weird it's because i matched with ()
+			outText.gsub!(match, "<a href=\"#{match}\">#{match}</a>")
+		end
+	end
+	return outText
 end
 
 def removecarriagereturns(text)
@@ -33,6 +47,6 @@ def titleFormat(titleText)
 end
 
 def p(text) #parse every function for displaying together
-	newlineify(linkify(htmlEscape(text)))
+	newlineify(linkify(idlinking(htmlEscape(text))))
 end
 

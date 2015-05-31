@@ -6,22 +6,28 @@ require_relative "../helperFunctions"
 <html>
 	<head>
 		<title>Wofl</title>
+		<link rel="stylesheet" href="/postview.css">
 	</head>
 	<body>
-		<a href="/">&lt; Return home</a>
-		<% 
-		postHash = JSON.parse(File.read("posts/#{params["captures"].first}")) %>
-		<h1><%=p postHash["0"]["title"]%></h1>
-		<p><%=p postHash["0"]["body"]%></p>
-		<form action="/comment" method="post" autocomplete="off">
-			<textarea id="comment" name="comment" autocomplete="off" placeholder="Place a comment..."></textarea>
-			<input type="hidden" name="postNumber" value="<%= params["captures"].first %>"/>
-			<button type="submit">Submit</button>
-		</form>
-		<% if postHash.length > 1 #if there have actually been replies
-			(1..postHash.length-1).reverse_each do |postIndex| %>
-				<p><%=p "Comment ##{postIndex}: #{postHash[postIndex.to_s]["body"]}"%></p>
-			<% end 
-		end %>
+		<a href="/">
+			<img class="woflImage" src="/wofl.png"></img>
+		</a>
+		<div class="postContainer">
+			<a href="/">&lt; Return home</a>
+			<% 
+			postHash = JSON.parse(File.read("posts/#{params["captures"].first}")) %>
+			<p class="postTitle"><%=htmlEscape postHash["0"]["title"]%></p>
+			<p><%=p postHash["0"]["body"]%></p>
+			<form action="/comment" method="post" autocomplete="off">
+				<textarea id="comment" name="comment" class="commentBox"autocomplete="off" placeholder="Place a comment..."></textarea>
+				<input type="hidden" name="postNumber" value="<%= params["captures"].first %>"/>
+				<button type="submit">Submit</button>
+			</form>
+			<% if postHash.length > 1 #if there have actually been replies
+				(1..postHash.length-1).reverse_each do |postIndex| %>
+					<p><%=p "Comment ##{postIndex}: #{postHash[postIndex.to_s]["body"]}"%></p>
+				<% end 
+			end %>
+		</div>
 	</body>
 </html> 

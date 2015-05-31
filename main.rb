@@ -28,7 +28,7 @@ postLimit = 500
 
 post "/createpost" do
 	postListing = Dir["posts/*"]
-	newPostIndex = postListing.max_by {|s| File.basename(s)} #find the post file with the highest index
+	newPostIndex = postListing.max_by {|s| File.basename(s).to_i } #find the post file with the highest index
 	if newPostIndex.nil? #make sure it's not broken if there are no other posts
 		newPostIndex = 0
 	else #proceed normally, get post number
@@ -39,7 +39,7 @@ post "/createpost" do
 									"title" => titleFormat(params["title"]), 
 									"body" => bodyFormat(params["body"])
 									}}))
-	minPostIndex = postListing.min_by {|s| File.basename(s)}
+	minPostIndex = postListing.min_by {|s| File.basename(s).to_i }
 	if minPostIndex.nil? #same checks and stuff
 		minPostIndex = 0
 	else
