@@ -1,13 +1,13 @@
-<% require 'json' %>
+<% require "json" %>
 
 <html>
 	<head>
-		<title></title>
+		<title>Wofl</title>
 	</head>
 	<body>
 		<a href="/createpost">Make a thread</a><br><br>
 		<% 
-		postListing = Dir['posts/*']
+		postListing = Dir["posts/*"]
 		postListing.sort! {|a, b| File.basename(a).to_i <=> File.basename(b).to_i }
 		postListing.each do |fileName| 
 			postHash = JSON.parse(File.read(fileName)) %>
