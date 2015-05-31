@@ -9,12 +9,14 @@
 		<% 
 		postListing = Dir["posts/*"]
 		postListing.sort! {|a, b| File.basename(b).to_i <=> File.basename(a).to_i }
-		postListing.each do |fileName| 
-			postHash = JSON.parse(File.read(fileName)) %>
-			<a href="/<%= File.basename(fileName) %>"><%=h "Post ##{File.basename(fileName)}: #{postHash["0"]["title"]}" %></a>
-			<br>
-			<div><%=h postHash["0"]["body"] %></div>
-			<br><br>
+		postListing.each do |fileName| %>
+			<div>
+				<% postHash = JSON.parse(File.read(fileName)) %>
+				<a href="/<%= File.basename(fileName) %>"><%=p "Post ##{File.basename(fileName)}: #{postHash["0"]["title"]}" %></a>
+				<br>
+				<div><%=p postHash["0"]["body"] %></div>
+				<br><br>
+			</div>
 		<% end %>
 	</body>
 </html>

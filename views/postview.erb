@@ -1,4 +1,7 @@
-<% require "json" %>
+<%
+require "json"
+require_relative "../helperFunctions"
+%>
 
 <html>
 	<head>
@@ -8,8 +11,8 @@
 		<a href="/">&lt; Return home</a>
 		<% 
 		postHash = JSON.parse(File.read("posts/#{params["captures"].first}")) %>
-		<h1><%=h postHash["0"]["title"] %></h1>
-		<p><%=h postHash["0"]["body"] %></p>
+		<h1><%=p postHash["0"]["title"]%></h1>
+		<p><%=p postHash["0"]["body"]%></p>
 		<form action="/comment" method="post" autocomplete="off">
 			<textarea id="comment" name="comment" autocomplete="off" placeholder="Place a comment..."></textarea>
 			<input type="hidden" name="postNumber" value="<%= params["captures"].first %>"/>
@@ -17,7 +20,7 @@
 		</form>
 		<% if postHash.length > 1 #if there have actually been replies
 			(1..postHash.length-1).reverse_each do |postIndex| %>
-				<p><%=h "Comment ##{postIndex}: #{postHash[postIndex.to_s]["body"]}" %></p>
+				<p><%=p "Comment ##{postIndex}: #{postHash[postIndex.to_s]["body"]}"%></p>
 			<% end 
 		end %>
 	</body>

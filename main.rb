@@ -3,7 +3,7 @@
 require "sinatra"
 require "json"
 require "cgi"
-require_relative "saftenString"
+require_relative "helperFunctions"
 
 set :bind, "0.0.0.0"
 set :port, 12975
@@ -11,10 +11,6 @@ set :port, 12975
 if !File.directory?("posts")
 	Dir.mkdir("posts")
 end
-
-def h(html) #http://stackoverflow.com/questions/2123586/how-do-i-html-escape-text-data-in-a-sinatra-app
-	CGI.escapeHTML html
-end 
 
 get "/" do
 	erb :index
@@ -40,8 +36,8 @@ post "/createpost" do
 	end
 	postFile = File.new("posts/#{newPostIndex}", "w") #create the post file with next number......
 	postFile.write(JSON.generate({"0" => { #......and write the post to it!
-									"title" => params["title"], 
-									"body" => params["body"]
+									"title" => titleFormat(params["title"]), 
+									"body" => bodyFormat(params["body"])
 									}}))
 	minPostIndex = postListing.min_by {|s| File.basename(s)}
 	if minPostIndex.nil? #same checks and stuff
@@ -60,7 +56,7 @@ post "/comment" do
 	postHash = JSON.parse(File.read("posts/#{params["postNumber"]}"))
 	postFile = File.open("posts/#{params["postNumber"]}", "w")
 	newCommentIndex = (postHash.max_by {|s| s[0].to_i}[0].to_i+1).to_s #get the max index comment, add one, convert back to string
-	postHash[newCommentIndex] = {"body" => params["comment"]}
+	postHash[newCommentIndex] = {"body" => bodyFormat(params["comment"])}
 	postJSON = JSON.generate(postHash)
 	postFile.write(postJSON)
 	postFile.close
