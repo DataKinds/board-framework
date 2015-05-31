@@ -2,6 +2,19 @@
 
 require "sinatra"
 require "json"
+require "cgi"
+require_relative "saftenString"
+
+set :bind, "0.0.0.0"
+set :port, 12975
+
+if !File.directory?("posts")
+	Dir.mkdir("posts")
+end
+
+def h(html) #http://stackoverflow.com/questions/2123586/how-do-i-html-escape-text-data-in-a-sinatra-app
+	CGI.escapeHTML html
+end 
 
 get "/" do
 	erb :index
@@ -15,20 +28,41 @@ get "/createpost" do
 	erb :createpost
 end
 
+postLimit = 500
+
 post "/createpost" do
 	postListing = Dir["posts/*"]
-	postListing.sort! {|a, b| File.basename(a).to_i <=> File.basename(b).to_i } #make sure no posts get accidentally overwritten (sort then rename in reverse)
-	postListing.reverse_each do |fileName| #move all the posts up one number...
-		File.rename(fileName, File.dirname(fileName) + "/" + (File.basename(fileName).to_i + 1).to_s)
+	newPostIndex = postListing.max_by {|s| File.basename(s)} #find the post file with the highest index
+	if newPostIndex.nil? #make sure it's not broken if there are no other posts
+		newPostIndex = 0
+	else #proceed normally, get post number
+		newPostIndex = File.basename(newPostIndex).to_i + 1
 	end
-	postFile = File.new("posts/0", "w") #create the post file......
+	postFile = File.new("posts/#{newPostIndex}", "w") #create the post file with next number......
 	postFile.write(JSON.generate({"0" => { #......and write the post to it!
 									"title" => params["title"], 
 									"body" => params["body"]
 									}}))
-	postFile.close
-	if File.exist?("posts/101") #...delete the 101"th one!
-		File.delete("posts/101")
+	minPostIndex = postListing.min_by {|s| File.basename(s)}
+	if minPostIndex.nil? #same checks and stuff
+		minPostIndex = 0
+	else
+		minPostIndex = File.basename(minPostIndex).to_i
 	end
-	redirect to("/0")
+	if (newPostIndex - 1) - minPostIndex > postLimit #make sure we're under the max posts
+		File.delete("posts/#{minPostIndex}")
+	end
+	postFile.close
+	redirect to("/")
+end
+
+post "/comment" do
+	postHash = JSON.parse(File.read("posts/#{params["postNumber"]}"))
+	postFile = File.open("posts/#{params["postNumber"]}", "w")
+	newCommentIndex = (postHash.max_by {|s| s[0].to_i}[0].to_i+1).to_s #get the max index comment, add one, convert back to string
+	postHash[newCommentIndex] = {"body" => params["comment"]}
+	postJSON = JSON.generate(postHash)
+	postFile.write(postJSON)
+	postFile.close
+	redirect to("/#{params["postNumber"]}")
 end

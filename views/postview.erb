@@ -5,13 +5,19 @@
 		<title>Wofl</title>
 	</head>
 	<body>
+		<a href="/">&lt; Return home</a>
 		<% 
 		postHash = JSON.parse(File.read("posts/#{params["captures"].first}")) %>
-		<h2><%= postHash["0"]["title"] %></h2>
-		<p><%= postHash["0"]["body"] %></p><br>
+		<h1><%=h postHash["0"]["title"] %></h1>
+		<p><%=h postHash["0"]["body"] %></p>
+		<form action="/comment" method="post" autocomplete="off">
+			<textarea id="comment" name="comment" autocomplete="off" placeholder="Place a comment..."></textarea>
+			<input type="hidden" name="postNumber" value="<%= params["captures"].first %>"/>
+			<button type="submit">Submit</button>
+		</form>
 		<% if postHash.length > 1 #if there have actually been replies
-			(1..postHash.length-1).each do |postIndex| %>
-				<p><%= postHash[postIndex.to_s]["body"] %></p>
+			(1..postHash.length-1).reverse_each do |postIndex| %>
+				<p><%=h "Comment ##{postIndex}: #{postHash[postIndex.to_s]["body"]}" %></p>
 			<% end 
 		end %>
 	</body>
