@@ -1,19 +1,18 @@
-folder organization:
-posts
-	<post number> (file, not folder) (deleted after 100, moved to top if posted on)
-		<json describing the post>
+board-framework
+======
+(aka what runs my website, wofl)
 
-json organization:
-{
-	'0' (first post, by OP)
-	{
-		'title' (title of the post)
-		'body' (text in the post)
-	}
-	'1'
-	{
-		'body' (no title, this is the reply)
-	}
-	'2'
-	...
-}
+It's pretty much an image board like, say, 4chan - but without image uploading. It includes:
+
+* Threads
+* User identification through IPs
+* Comments
+* Links
+* Links between threads
+* Emoticons
+* Comments
+* Length validation
+
+There's not much else, but it's really all that's needed for an online board. 
+
+Run it with `ruby main.rb`. It requires a new-ish sinatra and a ruby >= 2.0.0. It doesn't work on internet explorer either - the formatting on the comments gets messed up.
