@@ -22,7 +22,7 @@
 				postListing.each do |fileName| %>
 					<div>
 						<% postHash = JSON.parse(File.read(fileName)) %>
-						<a href="/<%= File.basename(fileName) %>" class="postTitle"><%=htmlEscape "#{postHash["0"]["title"]}" %>
+						<a href="/<%= File.basename(fileName) %>" class="postTitleText"><%=htmlEscape "#{postHash["0"]["title"]}" %>
 							<div class="idText">ID: <%= File.basename(fileName) %></div>
 						</a>
 						<br>

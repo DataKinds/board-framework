@@ -13,10 +13,11 @@ def idlinking(text)
 end
 
 def emoticonify(text)
-	emoticonTable = %w(420 b3bomber colonP evil girl heart kiss lester poo sad tophat wofl)
+	emoticonTable = %w(420 colonP evil girl heart kiss lester poo sad tophat wofl)
 	emoticonTable.each do |name|
-		text.gsub!(/:#{name}:/) { |match| "<img alt=\":#{name}:\" title=\":#{name}:\" class=\"emote\" src=\"/emotes/#{name}.png\">"}
+		text.gsub!(/:#{name}:/) { |match| "<img title=\":#{name}:\" class=\"emote\" src=\"/emotes/#{name}.png\">"}
 	end
+	text.gsub!(/:b3bomber:/) { |match| "<img class=\"emote\" title=\":triforcewofl:\" src=\"/emotes/NORMIESGETOFFMYBOARD.png\">"}#the special emote
 	return text
 end
 

@@ -3,14 +3,3 @@
 .postTitle:visited {
 	color: gray;
 }
-
-.idText {
-	font-size: 10px;
-}
-
-.postBody {
-	display: inline-block;
-	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
-}
