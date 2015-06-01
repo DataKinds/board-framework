@@ -1,5 +1,5 @@
-var maxCommentLength = 1000
-var minCommentLength = 5
+var maxCommentLength = 1000;
+var minCommentLength = 2;
 
 function commentLimitHandler() {
 	commentLengthBox = document.getElementById("commentLength");
@@ -10,7 +10,7 @@ function commentLimitHandler() {
 		commentLengthBox.setAttribute("style", "color: red;");
 		document.getElementById("commentSubmit").disabled = true;
 	} else if(comment.replace(/\s/g, "").length < minCommentLength) {
-		commentLengthBox.innerHTML = commentLength + "/" + maxCommentLength + " (you need at least 5 characters to post)";
+		commentLengthBox.innerHTML = commentLength + "/" + maxCommentLength + " (you need at least 2 letters to post)";
 		commentLengthBox.setAttribute("style", "color: red;");
 		document.getElementById("commentSubmit").disabled = true;
 	} else { //of a good posting length
@@ -33,7 +33,7 @@ function postSubmitButtonHandler() {
 }
 
 var maxTitleLength = 150;
-var minTitleLength = 4;
+var minTitleLength = 2;
 function titleLimitHandler() {
 	titleLengthBox = document.getElementById("titleLength");
 	title = document.getElementById("title").value;
@@ -43,7 +43,7 @@ function titleLimitHandler() {
 	if(titleLength > maxTitleLength) { //too long
 		titleLengthBox.setAttribute("style", "color: red;");
 	} else if(title.replace(/\s/g, "").length < minTitleLength) {
-		titleLengthBox.innerHTML = titleLength + "/" + maxTitleLength + " (you need at least 4 characters to post)";
+		titleLengthBox.innerHTML = titleLength + "/" + maxTitleLength + " (you need at least 2 letters to post)";
 		titleLengthBox.setAttribute("style", "color: red;");
 	} else { //of a good posting length
 		titleLengthBox.setAttribute("style", "");
@@ -52,7 +52,7 @@ function titleLimitHandler() {
 }
 
 var maxBodyLength = 5000;
-var minBodyLength = 4;
+var minBodyLength = 2;
 function bodyLimitHandler() {
 	bodyLengthBox = document.getElementById("bodyLength");
 	body = document.getElementById("body").value;
@@ -62,7 +62,7 @@ function bodyLimitHandler() {
 	if(bodyLength > maxBodyLength) { //too long
 		bodyLengthBox.setAttribute("style", "color: red;");
 	} else if(body.replace(/\s/g, "").length < minBodyLength) {
-		bodyLengthBox.innerHTML = "&nbsp;" + bodyLength + "/" + maxBodyLength + " (you need at least 4 characters to post)";
+		bodyLengthBox.innerHTML = "&nbsp;" + bodyLength + "/" + maxBodyLength + " (you need at least 2 letters to post)";
 		bodyLengthBox.setAttribute("style", "color: red;");
 	} else { //of a good posting length
 		bodyLengthBox.setAttribute("style", "");

@@ -6,7 +6,7 @@ require "cgi"
 require_relative "helperFunctions"
 
 set :bind, "0.0.0.0"
-set :port, 12975
+set :port, 7778
 
 if !File.directory?("posts")
 	Dir.mkdir("posts")
@@ -41,7 +41,7 @@ postLimit = 500
 
 post "/createpost" do
 	postListing = Dir["posts/*"]
-	if params["title"].length > 4 && params["body"].length > 5 #if there are enough chars
+	if params["title"].gsub(/\s/, "").length >= 2 && params["body"].gsub(/\s/, "").length >= 3 #if there are enough chars
 		newPostIndex = postListing.max_by {|s| File.basename(s).to_i } #find the post file with the highest index
 		if newPostIndex.nil? #make sure it's not broken if there are no other posts
 			newPostIndex = 0
@@ -69,7 +69,7 @@ post "/createpost" do
 end
 
 post "/comment" do
-	if (params["comment"].length) >= 5 #if the comment is at least 5 chars
+	if params["comment"].gsub(/\s/, "").length >= 5 #if the comment is at least 5 chars
 		postHash = JSON.parse(File.read("posts/#{params["postNumber"]}"))
 		postFile = File.open("posts/#{params["postNumber"]}", "w")
 		newCommentIndex = (postHash.max_by {|s| s[0].to_i}[0].to_i+1).to_s #get the max index comment, add one, convert back to string
