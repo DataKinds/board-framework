@@ -21,8 +21,10 @@ require_relative "../helperFunctions"
 			<a href="/">&lt; Return home</a>
 			<% 
 			postHash = JSON.parse(File.read("posts/#{params["captures"].first}")) %>
-			<div class="postTitleText"><%=htmlEscape postHash["0"]["title"]%>
-				<div class="idText">ID: <%= params["captures"].first %></div>
+			<div class="postTitle"><%=htmlEscape postHash["0"]["title"]%>
+				<div class="idText">ID: <%= params["captures"].first %> Comments: <%= postHash.max_by { |s| s[0].to_i }[0] %>
+					&nbsp;<span class="ipColor" style="background: #<%= postHash["0"]["color"]; %>"></span>
+				</div>
 			</div>
 			<p class="postBody"><%=p postHash["0"]["body"]%></p>
 			<form action="/comment" method="post" autocomplete="off">

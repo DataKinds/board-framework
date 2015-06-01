@@ -2,15 +2,22 @@ var postWindowOpen = false;
 
 function cancelPost() {
 	document.body.removeChild(document.getElementById("postFormHolder"));
+	document.body.removeChild(document.getElementById("shade"));
 	postWindowOpen = false;
 }
 
 function displayPostForm() {
 	if(!postWindowOpen) {
 		postWindowOpen = true;
+		var shade =document.createElement("div");
+		shade.setAttribute("class", "darken");
+		shade.setAttribute("id", "shade");
+		shade.setAttribute("onclick", "cancelPost()");
+		document.body.appendChild(shade);
+
 		var postFormHolder = document.createElement("div");
 		postFormHolder.setAttribute("class", "postFormHolder");
-		postFormHolder.setAttribute("id", "postFormHolder")
+		postFormHolder.setAttribute("id", "postFormHolder");
 		document.body.appendChild(postFormHolder);
 		var postForm = document.createElement("form");
 		postForm.setAttribute("action", "/createpost");

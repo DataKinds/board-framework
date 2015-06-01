@@ -17,6 +17,24 @@ html {
 	}
 }
 
+.ipColor {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+}
+
+.postTitle {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	font-size: 54px;
+	display: block;
+	text-align: center;
+	width: 100%;
+	text-decoration: none;
+	color: black;
+}
+
 .postContainer {
 	width: 60%;
 	margin-left: auto;
@@ -59,22 +77,10 @@ html {
 	z-index: 2;
 }
 
-.postTitleText {
-	font-family: 'Montserrat', sans-serif;
-	font-weight: 700;
-	font-size: 54px;
-	display: block;
-	text-align: center;
-	width: 100%;
-	text-decoration: none;
-	color: black;
-}
-
-.postBodyText {
-
-}
-
 .postBody {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
 	display: inline-block;
 	position: relative;
 	left: 50%;

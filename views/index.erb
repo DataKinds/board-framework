@@ -22,8 +22,10 @@
 				postListing.each do |fileName| %>
 					<div>
 						<% postHash = JSON.parse(File.read(fileName)) %>
-						<a href="/<%= File.basename(fileName) %>" class="postTitleText"><%=htmlEscape "#{postHash["0"]["title"]}" %>
-							<div class="idText">ID: <%= File.basename(fileName) %></div>
+						<a href="/<%= File.basename(fileName) %>" class="postTitle"><%=htmlEscape "#{postHash["0"]["title"]}" %>
+							<div class="idText">ID: <%= File.basename(fileName) %> Comments: <%= postHash.max_by { |s| s[0].to_i }[0] %>
+								&nbsp;<span class="ipColor" style="background: #<%= postHash["0"]["color"]; %>"></span>
+							</div>
 						</a>
 						<br>
 						<div class="postBody"><%=p postHash["0"]["body"] %></div>

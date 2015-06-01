@@ -12,6 +12,19 @@ if !File.directory?("posts")
 	Dir.mkdir("posts")
 end
 
+if !File.exist?("ipcolor")
+	File.open("ipcolor", "w") { |file| file.write("{}") }
+end
+
+get "*" do #make sure the ip is in the ipcolor database
+	ipListing = JSON.parse(File.read("ipcolor"))
+	if !ipListing.has_key?(request.ip)
+		ipListing[request.ip] = genRandomBrightColor()
+	end
+	File.open("ipcolor", "w") { |file| file.write(JSON.generate(ipListing)) }
+	pass
+end
+
 get "/" do
 	erb :index
 end
@@ -37,7 +50,8 @@ post "/createpost" do
 	postFile = File.new("posts/#{newPostIndex}", "w") #create the post file with next number......
 	postFile.write(JSON.generate({"0" => { #......and write the post to it!
 									"title" => titleFormat(params["title"]), 
-									"body" => bodyFormat(params["body"])
+									"body" => bodyFormat(params["body"]),
+									"color" => JSON.parse(File.read("ipcolor"))[request.ip]
 									}}))
 	minPostIndex = postListing.min_by {|s| File.basename(s).to_i }
 	if minPostIndex.nil? #same checks and stuff
@@ -56,7 +70,7 @@ post "/comment" do
 	postHash = JSON.parse(File.read("posts/#{params["postNumber"]}"))
 	postFile = File.open("posts/#{params["postNumber"]}", "w")
 	newCommentIndex = (postHash.max_by {|s| s[0].to_i}[0].to_i+1).to_s #get the max index comment, add one, convert back to string
-	postHash[newCommentIndex] = {"body" => bodyFormat(params["comment"])}
+	postHash[newCommentIndex] = {"body" => bodyFormat(params["comment"]), "color" => JSON.parse(File.read("ipcolor"))[request.ip]}
 	postJSON = JSON.generate(postHash)
 	postFile.write(postJSON)
 	postFile.close
