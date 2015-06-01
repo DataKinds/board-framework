@@ -15,11 +15,13 @@
 	width: calc(100% - 32px);
 	float: right;
 	word-wrap: break-word;
+	word-break: break-all;
 }
 
 .commentBox {
 	width: 100%;
 	word-wrap: break-word;
+	word-break: break-all;
 }
 
 .commentTable {
@@ -27,5 +29,6 @@
 	width: 100%;
 	max-width: 100%;
 	word-wrap: break-word;
+	word-break: break-all;
 	table-layout: fixed;
 }
