@@ -1,7 +1,20 @@
-@import url(http://fonts.googleapis.com/css?family=Montserrat:700); 
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(/postform.css); 
 
 html {
-	background: linear-gradient(180deg, #D0D0D0, #F0F0F0);
+	background: linear-gradient(180deg, #B0B0B0, #F0F0F0);
+}
+
+@keyframes spin {
+	from {
+		transform: skewX(10deg);
+	}
+	50% {
+		transform: skewX(-10deg);
+	}
+	to {
+		transform: skewX(10deg);
+	}
 }
 
 .postContainer {
@@ -9,6 +22,8 @@ html {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 90px;
+	padding: 100px;
+	background: #F0F0F0;
 }
 
 .woflImage {
@@ -16,6 +31,14 @@ html {
 	top: 0%;
 	left: 0%;
 	height: 70px;
+	z-index: 2;
+}
+
+.woflImage:hover {
+	animation-duration: 0.5s;
+	animation-name: spin;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
 }
 
 .topPanel {
@@ -25,6 +48,7 @@ html {
 	width: 100%;
 	height: 70px;
 	background: linear-gradient(180deg, #707070, #808080);
+	z-index: 1;
 }
 
 .postButton {
@@ -32,10 +56,12 @@ html {
 	top: 10px;
 	right: 10px;
 	height: 50px;
+	z-index: 2;
 }
 
 .postTitle {
 	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
 	font-size: 64px;
 	display: block;
 	text-align: center;
@@ -44,12 +70,6 @@ html {
 	color: black;
 }
 
-.postFormHolder {
-	position: fixed;
-	background: #002687;
-	width: 30%;
-	height: 50%;
-	left: 50%;
-	top: 50%;
-	transform: translateY(-50%) translateX(-50%);
+.emote {
+	height: 40px;
 }

@@ -4,22 +4,20 @@ end
 
 def linkify(text) #turn text that has a link into an actual link
 	urlRegex = /https?:\/\/\S+/i
-	outText = text
-	text.scan(urlRegex).each do |match|
-		outText.gsub!(match, "<a href=\"#{match}\">#{match}</a>")
-	end
-	return outText
+	return text.gsub(urlRegex) { |match| "<a href=\"#{match}\">#{match}</a>" }
 end
 
 def idlinking(text)
 	idRegex = /id(\d{1,3})/i
-	outText = text
-	text.scan(idRegex).each do |idSingleArray|
-		idSingleArray.each do |match| #each.each it's weird it's because i matched with ()
-			outText.gsub!(match, "<a href=\"#{match}\">#{match}</a>")
-		end
+	return text.gsub(idRegex) { |match| "<a href=\"#{match}\">#{match}</a>" }
+end
+
+def emoticonify(text)
+	emoticonTable = %w(420 b3bomber colonP evil girl heart kiss lester poo sad tophat wofl)
+	emoticonTable.each do |name|
+		text.gsub!(/:#{name}:/) { |match| "<img alt=\":#{name}:\" title=\":#{name}:\" class=\"emote\" src=\"/emotes/#{name}.png\">"}
 	end
-	return outText
+	return text
 end
 
 def removecarriagereturns(text)
@@ -47,6 +45,6 @@ def titleFormat(titleText)
 end
 
 def p(text) #parse every function for displaying together
-	newlineify(linkify(idlinking(htmlEscape(text))))
+	emoticonify(newlineify(linkify(idlinking(htmlEscape(text)))))
 end
 
