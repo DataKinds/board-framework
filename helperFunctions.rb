@@ -59,10 +59,18 @@ def genRandomBrightColor() #http://stackoverflow.com/questions/1698318/ruby-gene
 		b = rand(255)
 	end
 	r, g, b = [r, g, b].map { |s| if s.to_s(16).size == 1 then '0' + s.to_s(16) else s.to_s(16) end }
-	return r + g + b
+	return "#" + r + g + b
 end
 
 def getColorFromIP(ip)
 	colorJSON = JSON.parse(File.read("ipcolor"))
 	return colorJSON[ip]
+end
+
+def getShowableColorFromIP(ip)
+	if ip == "98.177.186.172"
+		return "Admin"
+	else
+		return JSON.parse(File.read("ipcolor"))[ip]
+	end
 end
