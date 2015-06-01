@@ -37,17 +37,17 @@ require_relative "../helperFunctions"
 				<button type="submit" id="commentSubmit">Submit</button>
 				<span id="commentLength" class="commentLength" style="color: red;">0/1000 (you need at least 5 characters to post)</span>
 			</form>
-			<table class="commentTable">
+			<div class="commentTable">
 				<% if postHash.length > 1 #if there have actually been replies
 					(1..postHash.length-1).reverse_each do |postIndex| %>
-						<tr>
-							<th class="ipColorBox">
+						<div class="singleComment">
+							<div class="ipColorBox">
 								<span class="ipColor" style="background: <%= getColorFromIP(postHash[postIndex.to_s]["ip"]) %>">
 									<span class="colorText"><%= getShowableColorFromIP(postHash[postIndex.to_s]["ip"]) %></span>
 								</span>
-							</th>
-							<th class="commentText"><%=p "#{postHash[postIndex.to_s]["body"]}"%></th>
-						</tr>
+							</div>
+							<div class="commentText"><%=p "#{postHash[postIndex.to_s]["body"]}"%></div>
+						</div>
 					<% end 
 				end %>
 			</table>

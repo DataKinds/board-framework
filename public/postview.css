@@ -12,7 +12,7 @@
 	font-weight: 400;
 	font-size: 14px;
 	text-align: left;
-	width: 100%;
+	width: calc(100% - 30px);
 	float: right;
 	word-wrap: break-word;
 	word-break: break-all;
@@ -31,7 +31,6 @@
 	max-width: 100%;
 	word-wrap: break-word;
 	word-break: break-all;
-	table-layout: fixed;
 }
 
 .commentLength {
@@ -40,4 +39,9 @@
 	font-weight: 400;
 	font-size: 14px;
 	text-align: right;
+}
+
+.singleComment {
+	overflow: hidden;
+	margin-bottom: 20px;
 }
