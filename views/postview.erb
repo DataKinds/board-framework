@@ -24,7 +24,7 @@ require_relative "../helperFunctions"
 			postHash = JSON.parse(File.read("posts/#{params["captures"].first}")) %>
 			<div class="postTitle"><%=htmlEscape postHash["0"]["title"]%>
 				<div class="idText">ID: <%= params["captures"].first %> Comments: <%= postHash.max_by { |s| s[0].to_i }[0] %>
-					&nbsp;<span class="ipColor" style="background: #<%= postHash["0"]["color"]; %>"></span>
+					&nbsp;<span class="ipColor" style="background: #<%= getColorFromIP(postHash["0"]["ip"]) %>"></span>
 				</div>
 			</div>
 			<p class="postBody"><%=p postHash["0"]["body"]%></p>
@@ -38,7 +38,7 @@ require_relative "../helperFunctions"
 				<% if postHash.length > 1 #if there have actually been replies
 					(1..postHash.length-1).reverse_each do |postIndex| %>
 						<tr>
-							<th class="ipColorBox"><span class="ipColor" style="background: #<%= postHash[postIndex.to_s]["color"]; %>"></span></th>
+							<th class="ipColorBox"><span class="ipColor" style="background: #<%= getColorFromIP(postHash[postIndex.to_s]["ip"]) %>"></span></th>
 							<th class="commentText"><%=p "#{postHash[postIndex.to_s]["body"]}"%></th>
 						</tr>
 					<% end 

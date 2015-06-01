@@ -52,7 +52,7 @@ post "/createpost" do
 		postFile.write(JSON.generate({"0" => { #......and write the post to it!
 										"title" => titleFormat(params["title"])[0..150], 
 										"body" => bodyFormat(params["body"])[0..5000],
-										"color" => JSON.parse(File.read("ipcolor"))[request.ip]
+										"ip" => request.ip
 										}}))
 		minPostIndex = postListing.min_by {|s| File.basename(s).to_i }
 		if minPostIndex.nil? #same checks and stuff
@@ -73,7 +73,7 @@ post "/comment" do
 		postHash = JSON.parse(File.read("posts/#{params["postNumber"]}"))
 		postFile = File.open("posts/#{params["postNumber"]}", "w")
 		newCommentIndex = (postHash.max_by {|s| s[0].to_i}[0].to_i+1).to_s #get the max index comment, add one, convert back to string
-		postHash[newCommentIndex] = {"body" => bodyFormat(params["comment"][0..1000]), "color" => JSON.parse(File.read("ipcolor"))[request.ip]} #post only the first 1000 chars
+		postHash[newCommentIndex] = {"body" => bodyFormat(params["comment"][0..1000]), "ip" => request.ip} #post only the first 1000 chars
 		postJSON = JSON.generate(postHash)
 		postFile.write(postJSON)
 		postFile.close

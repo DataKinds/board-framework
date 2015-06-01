@@ -25,15 +25,14 @@
 						<% postHash = JSON.parse(File.read(fileName)) %>
 						<a href="/<%= File.basename(fileName) %>" class="postTitle"><%=htmlEscape "#{postHash["0"]["title"]}" %>
 							<div class="idText">ID: <%= File.basename(fileName) %> Comments: <%= postHash.max_by { |s| s[0].to_i }[0] %>
-								&nbsp;<span class="ipColor" style="background: #<%= postHash["0"]["color"]; %>"></span>
+								&nbsp;<span class="ipColor" style="background: #<%= getColorFromIP(postHash["0"]["ip"]) %>"></span>
 							</div>
 						</a>
 						<br>
 						<div class="postBody"><%=p postHash["0"]["body"] %></div>
 						<br><br>
 					</div>
-			<% 
-				end
+				<% end
 			end %>
 		</div>
 	</body>
