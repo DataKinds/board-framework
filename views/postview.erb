@@ -32,11 +32,16 @@ require_relative "../helperFunctions"
 				<input type="hidden" name="postNumber" value="<%= params["captures"].first %>"/>
 				<button type="submit">Submit</button>
 			</form>
-			<% if postHash.length > 1 #if there have actually been replies
-				(1..postHash.length-1).reverse_each do |postIndex| %>
-					<p><%=p "Comment ##{postIndex}: #{postHash[postIndex.to_s]["body"]}"%></p>
-				<% end 
-			end %>
+			<table class="commentTable">
+				<% if postHash.length > 1 #if there have actually been replies
+					(1..postHash.length-1).reverse_each do |postIndex| %>
+						<tr>
+							<th class="ipColorBox"><span class="ipColor" style="background: #<%= postHash[postIndex.to_s]["color"]; %>"></span></th>
+							<th class="commentText"><%=p "#{postHash[postIndex.to_s]["body"]}"%></th>
+						</tr>
+					<% end 
+				end %>
+			</table>
 		</div>
 	</body>
 </html> 

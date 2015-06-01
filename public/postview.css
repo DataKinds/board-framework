@@ -1,3 +1,31 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+.ipColorBox {
+	display: inline-block;
+	padding: 10px;
+	padding-top: 5px;
+	vertical-align: top;
+}
+
+.commentText {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	text-align: left;
+	width: calc(100% - 32px);
+	float: right;
+	word-wrap: break-word;
+}
+
 .commentBox {
 	width: 100%;
+	word-wrap: break-word;
+}
+
+.commentTable {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	word-wrap: break-word;
+	table-layout: fixed;
 }
