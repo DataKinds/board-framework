@@ -9,7 +9,7 @@ function cancelPost() {
 function displayPostForm() {
 	if(!postWindowOpen) {
 		postWindowOpen = true;
-		var shade =document.createElement("div");
+		var shade = document.createElement("div");
 		shade.setAttribute("class", "darken");
 		shade.setAttribute("id", "shade");
 		shade.setAttribute("onclick", "cancelPost()");
@@ -28,10 +28,6 @@ function displayPostForm() {
 
 		var titleHolder = document.createElement("div");
 		postForm.appendChild(titleHolder);
-		//var titleLabel = document.createElement("label");
-		//titleLabel.setAttribute("for", "title");
-		//titleLabel.innerHTML = "Title:";
-		//titleHolder.appendChild(titleLabel);
 		var titleInput = document.createElement("input");
 		titleInput.setAttribute("type", "text");
 		titleInput.setAttribute("id", "title");
@@ -39,15 +35,19 @@ function displayPostForm() {
 		titleInput.setAttribute("class", "titleInput");
 		titleInput.setAttribute("placeholder", "Title here...");
 		titleInput.setAttribute("autocomplete", "off");
-		titleInput.setAttribute("onkeypress", "return(event.keyCode != 13)") //disallow enter
+		titleInput.setAttribute("onkeypress", "titleLimitHandler(); return(event.keyCode != 13)"); //disallow enter and run limit handler
+		titleInput.setAttribute("onkeyup", "titleLimitHandler()");
 		titleHolder.appendChild(titleInput);
+		var titleLength = document.createElement("div");
+		titleLength.innerHTML = "0/150 (need 4 characters to post)";
+		titleLength.setAttribute("float", "left");
+		titleLength.setAttribute("class", "length");
+		titleLength.setAttribute("style", "color: red;");
+		titleLength.setAttribute("id", "titleLength");
+		titleHolder.appendChild(titleLength);
 
 		var bodyHolder = document.createElement("div");
 		postForm.appendChild(bodyHolder);
-		//var bodyLabel = document.createElement("label");
-		//bodyLabel.setAttribute("for", "body");
-		//bodyLabel.innerHTML = "Body:";
-		//bodyHolder.appendChild(bodyLabel);
 		var bodyInput = document.createElement("textarea");
 		bodyInput.setAttribute("type", "text");
 		bodyInput.setAttribute("id", "body");
@@ -55,11 +55,22 @@ function displayPostForm() {
 		bodyInput.setAttribute("class", "bodyInput");
 		bodyInput.setAttribute("placeholder", "Body here...");
 		bodyInput.setAttribute("autocomplete", "off");
+		bodyInput.setAttribute("onkeypress", "bodyLimitHandler()"); //disallow enter and run limit handler
+		bodyInput.setAttribute("onkeyup", "bodyLimitHandler()");
 		bodyHolder.appendChild(bodyInput);
+		var bodyLength = document.createElement("div");
+		bodyLength.innerHTML = "&nbsp;0/5000 (need 5 characters to post)";
+		bodyLength.setAttribute("float", "left");
+		bodyLength.setAttribute("class", "length");
+		bodyLength.setAttribute("style", "color: red;");
+		bodyLength.setAttribute("id", "bodyLength");
+		bodyHolder.appendChild(bodyLength);
 
 		var submit = document.createElement("button");
 		submit.setAttribute("type", "submit");
 		submit.setAttribute("class", "submitButton");
+		submit.setAttribute("id", "submitButton");
+		submit.setAttribute("disabled", "true");
 		submit.innerHTML = "Submit";
 		postForm.appendChild(submit);
 

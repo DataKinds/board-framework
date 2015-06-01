@@ -41,38 +41,42 @@ postLimit = 500
 
 post "/createpost" do
 	postListing = Dir["posts/*"]
-	newPostIndex = postListing.max_by {|s| File.basename(s).to_i } #find the post file with the highest index
-	if newPostIndex.nil? #make sure it's not broken if there are no other posts
-		newPostIndex = 0
-	else #proceed normally, get post number
-		newPostIndex = File.basename(newPostIndex).to_i + 1
+	if params["title"].length > 4 && params["body"].length > 5 #if there are enough chars
+		newPostIndex = postListing.max_by {|s| File.basename(s).to_i } #find the post file with the highest index
+		if newPostIndex.nil? #make sure it's not broken if there are no other posts
+			newPostIndex = 0
+		else #proceed normally, get post number
+			newPostIndex = File.basename(newPostIndex).to_i + 1
+		end
+		postFile = File.new("posts/#{newPostIndex}", "w") #create the post file with next number......
+		postFile.write(JSON.generate({"0" => { #......and write the post to it!
+										"title" => titleFormat(params["title"])[0..150], 
+										"body" => bodyFormat(params["body"])[0..5000],
+										"color" => JSON.parse(File.read("ipcolor"))[request.ip]
+										}}))
+		minPostIndex = postListing.min_by {|s| File.basename(s).to_i }
+		if minPostIndex.nil? #same checks and stuff
+			minPostIndex = 0
+		else
+			minPostIndex = File.basename(minPostIndex).to_i
+		end
+		if (newPostIndex - 1) - minPostIndex > postLimit #make sure we're under the max posts
+			File.delete("posts/#{minPostIndex}")
+		end
+		postFile.close
 	end
-	postFile = File.new("posts/#{newPostIndex}", "w") #create the post file with next number......
-	postFile.write(JSON.generate({"0" => { #......and write the post to it!
-									"title" => titleFormat(params["title"]), 
-									"body" => bodyFormat(params["body"]),
-									"color" => JSON.parse(File.read("ipcolor"))[request.ip]
-									}}))
-	minPostIndex = postListing.min_by {|s| File.basename(s).to_i }
-	if minPostIndex.nil? #same checks and stuff
-		minPostIndex = 0
-	else
-		minPostIndex = File.basename(minPostIndex).to_i
-	end
-	if (newPostIndex - 1) - minPostIndex > postLimit #make sure we're under the max posts
-		File.delete("posts/#{minPostIndex}")
-	end
-	postFile.close
 	redirect to("/")
 end
 
 post "/comment" do
-	postHash = JSON.parse(File.read("posts/#{params["postNumber"]}"))
-	postFile = File.open("posts/#{params["postNumber"]}", "w")
-	newCommentIndex = (postHash.max_by {|s| s[0].to_i}[0].to_i+1).to_s #get the max index comment, add one, convert back to string
-	postHash[newCommentIndex] = {"body" => bodyFormat(params["comment"]), "color" => JSON.parse(File.read("ipcolor"))[request.ip]}
-	postJSON = JSON.generate(postHash)
-	postFile.write(postJSON)
-	postFile.close
+	if (params["comment"].length) >= 5 #if the comment is at least 5 chars
+		postHash = JSON.parse(File.read("posts/#{params["postNumber"]}"))
+		postFile = File.open("posts/#{params["postNumber"]}", "w")
+		newCommentIndex = (postHash.max_by {|s| s[0].to_i}[0].to_i+1).to_s #get the max index comment, add one, convert back to string
+		postHash[newCommentIndex] = {"body" => bodyFormat(params["comment"][0..1000]), "color" => JSON.parse(File.read("ipcolor"))[request.ip]} #post only the first 1000 chars
+		postJSON = JSON.generate(postHash)
+		postFile.write(postJSON)
+		postFile.close
+	end
 	redirect to("/#{params["postNumber"]}")
 end

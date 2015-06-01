@@ -7,6 +7,7 @@ require_relative "../helperFunctions"
 	<head>
 		<title>Wofl</title>
 		<script src="/post.js" type="text/javascript"></script>
+		<script src="/length.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/postview.css">
 		<link rel="stylesheet" href="/universal.css">
 	</head>
@@ -28,9 +29,10 @@ require_relative "../helperFunctions"
 			</div>
 			<p class="postBody"><%=p postHash["0"]["body"]%></p>
 			<form action="/comment" method="post" autocomplete="off">
-				<textarea id="comment" name="comment" class="commentBox"autocomplete="off" placeholder="Place a comment..."></textarea>
+				<textarea id="comment" name="comment" class="commentBox"autocomplete="off" placeholder="Place a comment..." onkeypress="commentLimitHandler()" onkeyup="commentLimitHandler()"></textarea>
 				<input type="hidden" name="postNumber" value="<%= params["captures"].first %>"/>
-				<button type="submit">Submit</button>
+				<button type="submit" id="commentSubmit">Submit</button>
+				<span id="commentLength" class="commentLength" style="color: red;">0/1000 (you need at least 5 characters to post)</span>
 			</form>
 			<table class="commentTable">
 				<% if postHash.length > 1 #if there have actually been replies

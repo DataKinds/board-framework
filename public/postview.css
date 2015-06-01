@@ -19,9 +19,10 @@
 }
 
 .commentBox {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
 	width: 100%;
-	word-wrap: break-word;
-	word-break: break-all;
 }
 
 .commentTable {
@@ -31,4 +32,12 @@
 	word-wrap: break-word;
 	word-break: break-all;
 	table-layout: fixed;
+}
+
+.commentLength {
+	float: right;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	text-align: right;
 }

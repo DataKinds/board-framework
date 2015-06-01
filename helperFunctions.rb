@@ -53,7 +53,7 @@ def genRandomBrightColor() #http://stackoverflow.com/questions/1698318/ruby-gene
 	r = rand(255)
 	g = rand(255)
 	b = rand(255)
-	while r+g+b > 255*1.1 && r+g+b < 255*1.9 #medium brightness (crappy math okay)
+	while r+g+b > 255*1.1 && r+g+b < 255*2.2 #medium brightness (crappy math okay)
 		r = rand(255)
 		g = rand(255)
 		b = rand(255)
