@@ -14,9 +14,9 @@ require_relative "../helperFunctions"
 	<body>
 		<div class="topPanel">
 			<a href="/">
-				<img class="woflImage" src="/wofl.png"></img>
+				<img class="woflImage" src="/wofl.png">
 			</a>
-			<img src="/add.png" alt="Post something!" id="postButton" class="postButton" onclick="displayPostForm()"></img>
+			<img src="/add.png" alt="Post something!" id="postButton" class="postButton" onclick="displayPostForm()">
 		</div>
 		<div class="postContainer">
 			<a href="/">&lt; Return home</a>
@@ -32,10 +32,10 @@ require_relative "../helperFunctions"
 			</div>
 			<p class="postBody"><%=p postHash["0"]["body"]%></p>
 			<form action="/comment" method="post" autocomplete="off">
-				<textarea id="comment" name="comment" class="commentBox"autocomplete="off" placeholder="Place a comment..." onkeypress="commentLimitHandler()" onkeyup="commentLimitHandler()"></textarea>
+				<textarea id="comment" name="comment" class="commentBox" autocomplete="off" placeholder="Place a comment..." onkeypress="commentLimitHandler()" onkeyup="commentLimitHandler()"></textarea>
 				<input type="hidden" name="postNumber" value="<%= params["captures"].first %>"/>
 				<button type="submit" id="commentSubmit">Submit</button>
-				<span id="commentLength" class="commentLength" style="color: red;">0/1000 (you need at least 5 characters to post)</span>
+				<span id="commentLength" class="commentLength" style="color: red;">0/1000 (you need at least 2 letters to post)</span>
 			</form>
 			<div class="commentTable">
 				<% if postHash.length > 1 #if there have actually been replies

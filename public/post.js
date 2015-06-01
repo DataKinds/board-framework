@@ -39,7 +39,7 @@ function displayPostForm() {
 		titleInput.setAttribute("onkeyup", "titleLimitHandler()");
 		titleHolder.appendChild(titleInput);
 		var titleLength = document.createElement("div");
-		titleLength.innerHTML = "0/150 (need 4 characters to post)";
+		titleLength.innerHTML = "0/150 (you need at least 2 letters to post)";
 		titleLength.setAttribute("float", "left");
 		titleLength.setAttribute("class", "length");
 		titleLength.setAttribute("style", "color: red;");
@@ -59,7 +59,7 @@ function displayPostForm() {
 		bodyInput.setAttribute("onkeyup", "bodyLimitHandler()");
 		bodyHolder.appendChild(bodyInput);
 		var bodyLength = document.createElement("div");
-		bodyLength.innerHTML = "&nbsp;0/5000 (need 5 characters to post)";
+		bodyLength.innerHTML = "&nbsp;0/5000 (you need at least 2 letters to post)";
 		bodyLength.setAttribute("float", "left");
 		bodyLength.setAttribute("class", "length");
 		bodyLength.setAttribute("style", "color: red;");

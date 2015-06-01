@@ -69,7 +69,7 @@ end
 
 def getShowableColorFromIP(ip)
 	if ip == "98.177.186.172"
-		return "Admin"
+		return JSON.parse(File.read("ipcolor"))[ip] +" (admin)"
 	else
 		return JSON.parse(File.read("ipcolor"))[ip]
 	end
