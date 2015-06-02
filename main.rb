@@ -37,7 +37,7 @@ get "/createpost" do
 	erb :createpost
 end
 
-postLimit = 500
+postLimit = 20
 
 post "/createpost" do
 	postListing = Dir["posts/*"]
