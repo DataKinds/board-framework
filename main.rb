@@ -37,7 +37,7 @@ get "/createpost" do
 	erb :createpost
 end
 
-postLimit = 20
+postLimit = 100
 
 post "/createpost" do
 	postListing = Dir["posts/*"]
@@ -69,7 +69,7 @@ post "/createpost" do
 end
 
 post "/comment" do
-	if params["comment"].gsub(/\s/, "").length >= 5 #if the comment is at least 5 chars
+	if params["comment"].gsub(/\s/, "").length >= 2 #if the comment is at least 5 chars
 		postHash = JSON.parse(File.read("posts/#{params["postNumber"]}"))
 		postFile = File.open("posts/#{params["postNumber"]}", "w")
 		newCommentIndex = (postHash.max_by {|s| s[0].to_i}[0].to_i+1).to_s #get the max index comment, add one, convert back to string
