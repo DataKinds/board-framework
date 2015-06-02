@@ -21,7 +21,7 @@ require_relative "../helperFunctions"
 		<div class="postContainer">
 			<a href="/">&lt; Return home</a>
 			<% 
-			postHash = JSON.parse(File.read("posts/#{params["captures"].first}")) %>
+			postHash = JSON.parse(File.read("posts/#{params["captures"].first}", :encoding => "utf-8")) %>
 			<div class="postTitle"><%=htmlEscape postHash["0"]["title"]%>
 				<div class="idText">ID: <%= params["captures"].first %> Comments: <%= postHash.max_by { |s| s[0].to_i }[0] %>
 					&nbsp;

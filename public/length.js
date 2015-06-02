@@ -32,7 +32,7 @@ function postSubmitButtonHandler() {
 	}
 }
 
-var maxTitleLength = 150;
+var maxTitleLength = 100;
 var minTitleLength = 2;
 function titleLimitHandler() {
 	titleLengthBox = document.getElementById("titleLength");

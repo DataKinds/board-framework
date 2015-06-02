@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+# encoding: utf-8
 require "sinatra"
 require "json"
 require "cgi"
@@ -48,9 +48,9 @@ post "/createpost" do
 		else #proceed normally, get post number
 			newPostIndex = File.basename(newPostIndex).to_i + 1
 		end
-		postFile = File.new("posts/#{newPostIndex}", "w") #create the post file with next number......
+		postFile = File.new("posts/#{newPostIndex}", "w:utf-8") #create the post file with next number......
 		postFile.write(JSON.generate({"0" => { #......and write the post to it!
-										"title" => titleFormat(params["title"])[0..150], 
+										"title" => titleFormat(params["title"])[0..100], 
 										"body" => bodyFormat(params["body"])[0..5000],
 										"ip" => request.ip
 										}}))
@@ -70,8 +70,8 @@ end
 
 post "/comment" do
 	if params["comment"].gsub(/\s/, "").length >= 2 #if the comment is at least 5 chars
-		postHash = JSON.parse(File.read("posts/#{params["postNumber"]}"))
-		postFile = File.open("posts/#{params["postNumber"]}", "w")
+		postHash = JSON.parse(File.read("posts/#{params["postNumber"]}", :encoding => "utf-8"))
+		postFile = File.open("posts/#{params["postNumber"]}", "w:utf-8")
 		newCommentIndex = (postHash.max_by {|s| s[0].to_i}[0].to_i+1).to_s #get the max index comment, add one, convert back to string
 		postHash[newCommentIndex] = {"body" => bodyFormat(params["comment"][0..1000]), "ip" => request.ip} #post only the first 1000 chars
 		postJSON = JSON.generate(postHash)

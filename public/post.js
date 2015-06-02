@@ -39,7 +39,7 @@ function displayPostForm() {
 		titleInput.setAttribute("onkeyup", "titleLimitHandler()");
 		titleHolder.appendChild(titleInput);
 		var titleLength = document.createElement("div");
-		titleLength.innerHTML = "0/150 (you need at least 2 letters to post)";
+		titleLength.innerHTML = "0/100 (you need at least 2 letters to post)";
 		titleLength.setAttribute("float", "left");
 		titleLength.setAttribute("class", "length");
 		titleLength.setAttribute("style", "color: red;");
