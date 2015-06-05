@@ -3,3 +3,10 @@
 .postTitle:visited {
 	color: gray;
 }
+
+.seeMore {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	font-size: 14px;
+	text-align: center;
+}

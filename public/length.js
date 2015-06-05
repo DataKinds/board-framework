@@ -57,7 +57,7 @@ function bodyLimitHandler() {
 	bodyLengthBox = document.getElementById("bodyLength");
 	body = document.getElementById("body").value;
 	bodyLength = body.length;
-	bodyLengthBox.innerHTML = bodyLength + "/" + maxBodyLength;
+	bodyLengthBox.innerHTML = "&nbsp;" + bodyLength + "/" + maxBodyLength;
 	submitButton = document.getElementById("submitButton");
 	if(bodyLength > maxBodyLength) { //too long
 		bodyLengthBox.setAttribute("style", "color: red;");

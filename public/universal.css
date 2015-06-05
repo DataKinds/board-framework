@@ -51,6 +51,7 @@ html {
 	margin-right: auto;
 	margin-top: 90px;
 	padding: 100px;
+	padding-bottom: 20px;
 	background: #F0F0F0;
 }
 
@@ -105,4 +106,13 @@ html {
 
 .idText {
 	font-size: 10px;
+}
+
+.footerText{
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	color: gray;
+	width: 100%;
+	text-align: center;
 }
