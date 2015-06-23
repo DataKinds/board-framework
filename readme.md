@@ -2,7 +2,7 @@ board-framework
 ======
 (aka what runs my website, wofl)
 
-It's pretty much an image board like, say, 4chan - but without image uploading. It includes:
+It's pretty much an image board like, say, 4chan - ~~but without image uploading~~. It includes:
 
 * Threads
 * User identification through IPs
@@ -12,6 +12,7 @@ It's pretty much an image board like, say, 4chan - but without image uploading. 
 * Emoticons
 * Comments
 * Length validation
+* Images now, I guess
 
 There's not much else, but it's really all that's needed for an online board. 
 
