@@ -31,6 +31,9 @@ require_relative "../helperFunctions"
 					</span>
 				</div>
 			</div>
+			<a href="/uploads/<%= postHash["0"]["image"] %>" style="width: 100%">
+				<img src="/uploads/<%= postHash["0"]["image"] %>" class="postImage" />
+			</a>
 			<p class="postBody"><%=p postHash["0"]["body"]%></p>
 			<form action="/comment" method="post" autocomplete="off">
 				<textarea id="comment" name="comment" class="commentBox" autocomplete="off" placeholder="Place a comment..." onkeypress="commentLimitHandler()" onkeyup="commentLimitHandler()"></textarea>

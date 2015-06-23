@@ -45,7 +45,7 @@ end
 postLimit = 100
 
 post "/createpost" do
-	if (params["image"][:tempfile].size < 4*1000000) && (params["image"][:filename].end_with? *%w(.jpg .png .gif .jpeg .bmp .tiff)) #if the image is smaller than 4 mb and is image
+	if (params["image"][:tempfile].size < 2*1000000) && (params["image"][:filename].downcase.end_with? *%w(.jpg .png .gif .jpeg .bmp .tiff)) #if the image is smaller than 4 mb and is image
 		postListing = Dir["posts/*"]
 		if params["title"].gsub(/\s/, "").length >= 2 && params["body"].gsub(/\s/, "").length >= 3 #if there are enough chars
 			newPostIndex = postListing.max_by {|s| File.basename(s).to_i } #find the post file with the highest index
