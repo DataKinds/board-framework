@@ -2,7 +2,7 @@ board-framework
 ======
 (aka what runs my website, wofl)
 
-It's pretty much an image board like, say, 4chan - ~~but without image uploading~~. It includes:
+It's pretty much an image board like, say, 4chan - but with~~out~~ image uploading. It includes:
 
 * Threads
 * User identification through IPs
