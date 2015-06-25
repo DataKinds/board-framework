@@ -59,7 +59,13 @@ require_relative "../helperFunctions"
 									<span class="colorText"><%= getShowableColorFromIP(postHash[postIndex.to_s]["ip"]) %></span>
 								</span>
 							</div>
+							<br>
 							<div class="commentText"><%=p "#{postHash[postIndex.to_s]["body"]}"%></div>
+							<% if !postHash[postIndex.to_s]["image"].nil? %>
+								<a href="/uploads/<%= postHash[postIndex.to_s]["image"] %>" style="display:block; float: right" class="imageLink">
+									<img src="/uploads/<%= postHash[postIndex.to_s]["image"] %>" class="commentImage" />
+								</a>
+							<% end %>
 						</div>
 					<% end 
 				end %>

@@ -12,8 +12,9 @@
 	font-weight: 400;
 	font-size: 14px;
 	text-align: left;
-	width: calc(100% - 30px);
-	float: right;
+	width: calc(100% - 50px - 40px);
+	float: left;
+	padding-left: 40px;
 	word-wrap: break-word;
 	word-break: normal;
 }
@@ -42,4 +43,13 @@
 .singleComment {
 	overflow: hidden;
 	margin-bottom: 20px;
+}
+
+.commentImage {
+	display: block;
+	float: right;
+	margin-left: auto;
+	margin-right: auto;
+	max-height: 50px;
+	max-width: 50px;
 }
