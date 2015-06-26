@@ -16,7 +16,7 @@ def idlinking(text)
 end
 
 def emoticonify(text)
-	emoticonTable = %w(420 colonP evil girl love kiss lester poo sad tophat wofl wan)
+	emoticonTable = %w(420 colonP evil girl love kiss lester poo sad tophat wofl wan aiden fibonacci anthony skywhale)
 	emoticonTable.each do |name|
 		text.gsub!(/:#{name}:/) { |match| "<img title=\":#{name}:\" class=\"emote\" src=\"/emotes/#{name}.png\">"}
 	end

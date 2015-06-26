@@ -9,11 +9,6 @@ require_relative "../helperFunctions"
 		<script src="/post.js" type="text/javascript"></script>
 		<script src="/lengthConstants.js" type="text/javascript"></script>
 		<script src="/length.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			var toggleImageSubmit() {
-				
-			}
-		</script>
 		<link rel="stylesheet" href="/postview.css">
 		<link rel="stylesheet" href="/universal.css">
 	</head>
@@ -23,6 +18,10 @@ require_relative "../helperFunctions"
 				<img class="woflImage" src="/wofl.png">
 			</a>
 			<img src="/add.png" alt="Post something!" id="postButton" class="postButton" onclick="displayPostForm()">
+			<ol class="rules">Rules&#58; 
+				<li>No NSFW pictures. Cute/ecchi-ish is okay, just no huge porn.</li>
+				<li>Don&#39;t be mean.</li>
+			</ol>
 		</div>
 		<div class="postContainer">
 			<a href="/">&lt; Return home</a>
@@ -43,12 +42,12 @@ require_relative "../helperFunctions"
 			<form action="/comment" method="post" autocomplete="off" enctype="multipart/form-data">
 				<textarea id="comment" name="comment" class="commentBox" autocomplete="off" placeholder="Place a comment..." onkeypress="commentLimitHandler()" onkeyup="commentLimitHandler()"></textarea>
 				<input type="hidden" name="postNumber" value="<%= params["captures"].first %>"/>
-				<input type="checkbox" id="submitImageCheck" name="submitImageCheck" onclick="document.getElementById('image').disabled = !document.getElementById('submitImageCheck').checked"/>
+				<input type="checkbox" id="submitImageCheck" name="submitImageCheck" onclick="document.getElementById('image').disabled = !document.getElementById('submitImageCheck').checked; commentSubmitButtonHandler();"/>
 				<label for="submitImageCheck">Image?</label>
-				<input type="file" accept="image/*" name="image" id="image" disabled/>
+				<input type="file" accept="image/*" name="image" id="image" onchange="commentSubmitButtonHandler()" disabled/>
 				<span id="commentLength" class="commentLength" style="color: red;">0/1000 (you need at least 2 letters to post)</span>
 				<br>
-				<button type="submit" id="commentSubmit">Submit</button>
+				<button type="submit" id="commentSubmit" disabled>Submit</button>
 			</form>
 			<div class="commentTable">
 				<% if postHash.length > 1 #if there have actually been replies

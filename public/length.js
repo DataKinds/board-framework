@@ -1,3 +1,25 @@
+function commentSubmitButtonHandler() {
+	var commentOK = !(commentLength > maxCommentLength || document.getElementById("comment").value.replace(/\s/g, "").length < minCommentLength);
+	var imageUpload = document.getElementById("image");
+	var fileOK = function() {
+					if(document.getElementById("submitImageCheck").checked) {
+					 	if(imageUpload.value != "") {
+					 		return imageUpload.files[0].size <= maxFileSize;
+					 	} else {
+					 		return false;
+					 	}
+					 } else {
+					 	return true;
+					 }
+				 }();
+	var submitButton = document.getElementById("commentSubmit");
+	if (commentOK && fileOK) {
+		submitButton.disabled = false;
+	} else {
+		submitButton.disabled = true;
+	}
+}
+
 function commentLimitHandler() {
 	commentLengthBox = document.getElementById("commentLength");
 	comment = document.getElementById("comment").value;
@@ -14,13 +36,14 @@ function commentLimitHandler() {
 		commentLengthBox.setAttribute("style", "");
 		document.getElementById("commentSubmit").disabled = false;
 	}
+	commentSubmitButtonHandler();
 }
 
 function postSubmitButtonHandler() {
-	titleOK = !(titleLength > maxTitleLength || document.getElementById("title").value.replace(/\s/g, "").length < minTitleLength);
-	bodyOK = !(bodyLength > maxBodyLength || document.getElementById("body").value.replace(/\s/g, "").length < minBodyLength);
-	fileOK = !(document.getElementById("fileInput").files[0].size > maxFileSize);
-	submitButton = document.getElementById("submitButton");
+	var titleOK = !(titleLength > maxTitleLength || document.getElementById("title").value.replace(/\s/g, "").length < minTitleLength);
+	var bodyOK = !(bodyLength > maxBodyLength || document.getElementById("body").value.replace(/\s/g, "").length < minBodyLength);
+	var fileOK = document.getElementById("fileInput").files[0].size <= maxFileSize;
+	var submitButton = document.getElementById("submitButton");
 	if (titleOK && bodyOK && fileOK) {
 		submitButton.disabled = false;
 		submitButton.setAttribute("style", "background: green");
