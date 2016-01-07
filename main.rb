@@ -14,7 +14,7 @@ if !File.directory?("posts")
 end
 
 if !File.directory?("public/uploads")
-	Dir.mkdir("publics/uploads")
+	Dir.mkdir("public/uploads")
 end
 
 if !File.exist?("ipcolor")
