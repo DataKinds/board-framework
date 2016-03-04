@@ -1,7 +1,7 @@
 var maxCommentLength = 1000;
 var minCommentLength = 2;
 
-var maxFileSize = 2*1000000 //megabytes
+var maxFileSize = 16*1000000 //megabytes
 
 var maxTitleLength = 100;
 var minTitleLength = 2;

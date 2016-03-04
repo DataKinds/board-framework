@@ -45,7 +45,7 @@ end
 postLimit = 60
 
 def uploadImage(tempfile, filename)
-	if (tempfile.size < 2*1000000) && (filename.downcase.end_with? *%w(.jpg .png .gif .jpeg .bmp .tiff))
+	if (tempfile.size < 16*1000000) && (filename.downcase.end_with? *%w(.jpg .png .gif .jpeg .bmp .tiff))
 		randomFileName = (0..9).map { (65 + rand(26)).chr }.join #http://stackoverflow.com/questions/88311/how-best-to-generate-a-random-string-in-ruby
 		fullFileName = randomFileName + File.extname(filename)
 		FileUtils.copy(tempfile.path, "public/uploads/#{fullFileName}")
