@@ -3,7 +3,7 @@
 require "sinatra"
 require "json"
 require "cgi"
-require "FileUtils"
+require "fileutils"
 require_relative "helperFunctions"
 
 set :bind, "0.0.0.0"
